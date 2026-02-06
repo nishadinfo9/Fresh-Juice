@@ -89,7 +89,7 @@ const HealthBenefits = () => {
               text="Explore Our Menu"
               variant="secondary"
               size="large"
-              className="bg-white text-primary-600 hover:bg-gray-100"
+              className=""
               onClick={() =>
                 document
                   .querySelector("#shop")
