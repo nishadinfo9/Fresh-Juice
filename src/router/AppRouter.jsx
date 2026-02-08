@@ -2,7 +2,7 @@ import React, { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // Layout & Utils
-import Layout from "../layout/Layout";
+import Layout from "../Layout/Layout";
 import ScrollToTop from "../utils/ScrollToTop";
 
 // Regular (critical) pages

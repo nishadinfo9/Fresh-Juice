@@ -79,3 +79,5 @@ storybook-static/
 *.local
 *.swp
 *.bak
+
+.vercel
