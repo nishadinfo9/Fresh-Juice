@@ -125,8 +125,8 @@ const DeliveryInfo = () => {
                   </div>
                 </div>
               </div>
-              <div className="absolute -z-10 -bottom-8 -right-8 w-64 h-64 bg-primary-300 rounded-full opacity-20 blur-3xl"></div>
-              <div className="absolute -z-10 -top-8 -left-8 w-64 h-64 bg-secondary-300 rounded-full opacity-20 blur-3xl"></div>
+              <div className="absolute -z-10 -bottom-8 -right-8 md:w-64 md:h-64 bg-primary-300 rounded-full opacity-20 blur-3xl"></div>
+              <div className="absolute -z-10 -top-8 -left-8 md:w-64 md:h-64 bg-secondary-300 rounded-full opacity-20 blur-3xl"></div>
             </div>
           </motion.div>
         </div>

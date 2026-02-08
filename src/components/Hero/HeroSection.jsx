@@ -2,13 +2,15 @@ import React from "react";
 import { motion } from "framer-motion";
 import Button from "../UI/Button";
 import FloatingElements from "./FloatingElements";
+import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
+  const navigate = useNavigate();
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary-50 via-white to-secondary-50 pt-20">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary-50 via-white to-secondary-50 ">
       <FloatingElements />
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-15">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Text Content */}
           <motion.div
@@ -32,21 +34,13 @@ const HeroSection = () => {
                 text="Shop Now"
                 variant="primary"
                 size="large"
-                onClick={() =>
-                  document
-                    .querySelector("#shop")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
+                onClick={() => navigate("/shop")}
               />
               <Button
                 text="Learn More"
                 variant="secondary"
                 size="large"
-                onClick={() =>
-                  document
-                    .querySelector("#about")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
+                onClick={() => navigate("/about")}
               />
             </div>
           </motion.div>

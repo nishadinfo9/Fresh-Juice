@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { CartContext } from "./CartContext";
 
+// Import your product list or fetch from backend
+import { products } from "../data/data"; // your product data
+
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(() => {
     const savedCart = localStorage.getItem("cart");
@@ -8,20 +11,30 @@ export const CartProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cartItems));
+    localStorage.setItem(
+      "cart",
+      JSON.stringify(cartItems.map(({ id, quantity }) => ({ id, quantity }))),
+    );
   }, [cartItems]);
 
-  const addToCart = (product) => {
-    setCartItems((prevItems) => {
-      const existingItem = prevItems.find((item) => item.id === product.id);
-      if (existingItem) {
-        return prevItems.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item,
+  const getCartDetails = () =>
+    cartItems
+      .map((item) => {
+        const product = products.find((p) => p.id === item.id);
+        if (!product) return null;
+        return { ...product, quantity: item.quantity };
+      })
+      .filter(Boolean);
+
+  const addToCart = (id) => {
+    setCartItems((prev) => {
+      const existing = prev.find((item) => item.id === id);
+      if (existing) {
+        return prev.map((item) =>
+          item.id === id ? { ...item, quantity: item.quantity + 1 } : item,
         );
       }
-      return [...prevItems, { ...product, quantity: 1 }];
+      return [...prev, { id, quantity: 1 }];
     });
   };
 
@@ -32,10 +45,8 @@ export const CartProvider = ({ children }) => {
   };
 
   const updateQuantity = (productId, quantity) => {
-    if (quantity <= 0) {
-      removeFromCart(productId);
-      return;
-    }
+    if (quantity < 1) return;
+
     setCartItems((prevItems) =>
       prevItems.map((item) =>
         item.id === productId ? { ...item, quantity } : item,
@@ -48,20 +59,18 @@ export const CartProvider = ({ children }) => {
   };
 
   const getCartTotal = () => {
-    return cartItems.reduce((total, item) => {
-      const price = parseFloat(item.price.replace("$", ""));
-      return total + price * item.quantity;
-    }, 0);
+    return getCartDetails().reduce(
+      (total, item) => total + item.price * item.quantity,
+      0,
+    );
   };
 
-  const getCartCount = () => {
-    return cartItems.reduce((count, item) => count + item.quantity, 0);
-  };
+  const getCartCount = () => cartItems.length;
 
   return (
     <CartContext.Provider
       value={{
-        cartItems,
+        cartItems: getCartDetails(), // now includes full product info for display
         addToCart,
         removeFromCart,
         updateQuantity,

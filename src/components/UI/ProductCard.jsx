@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { FiShoppingCart } from "react-icons/fi";
 import { useCart } from "../../context/UseCart";
 import { Link } from "react-router-dom";
@@ -12,50 +12,55 @@ const ProductCard = ({ id, image, name, description, price }) => {
   };
 
   const handleAddToCart = () => {
-    addToCart({ id, image, name, description, price });
+    addToCart(id);
   };
+  console.log(id);
 
   return (
-    <div className="group bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2">
-      <div className="relative overflow-hidden aspect-square">
+    <div className="group bg-white md:h-96 md:w-72 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col">
+      <div className="relative h-64 w-full overflow-hidden">
         {imageError ? (
           <div className="w-full h-full bg-gradient-to-br from-primary-100 to-secondary-100 flex items-center justify-center">
             <span className="text-6xl">🥤</span>
           </div>
         ) : (
-          <Link to={"/"}>
+          <Link to={`/product/${id}`}>
             <img
               src={image}
               alt={name}
-              width="400"
-              height="400"
-              loading="lazy"
               onError={handleImageError}
+              loading="lazy"
               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
             />
           </Link>
         )}
       </div>
 
-      <div className="p-6">
-        <Link to={"/"}>
-          <h3 className="text-xl font-bold text-gray-900 mb-2">{name}</h3>
-        </Link>
+      {/* Content Section */}
+      <div className="flex-1 p-4 flex flex-col justify-between">
+        <div>
+          <Link to={`/product/${id}`}>
+            <h3 className="text-lg font-bold text-gray-900 mb-1 line-clamp-1">
+              {name?.length > 20 ? name.slice(0, 20) + "..." : name}
+            </h3>
+          </Link>
+          {description && (
+            <p className="text-gray-600 text-sm line-clamp-2">
+              {description.length > 35
+                ? description.slice(0, 35) + "..."
+                : description}
+            </p>
+          )}
+        </div>
 
-        {description && (
-          <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-            {description}
-          </p>
-        )}
-
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mt-4">
           {price && (
-            <p className="text-primary-600 font-bold text-lg">{price}</p>
+            <p className="text-primary-600 font-bold text-lg">${price}</p>
           )}
 
           <button
             onClick={handleAddToCart}
-            className="flex items-center space-x-2 bg-primary-500 text-white px-4 py-2 rounded-lg hover:bg-primary-600 transition-colors min-h-[44px] min-w-[44px]"
+            className="flex items-center space-x-2 bg-primary-500 text-white px-4 py-2 rounded-lg hover:bg-primary-600 transition-colors"
             aria-label={`Add ${name} to cart`}
           >
             <FiShoppingCart className="w-5 h-5" />
@@ -67,4 +72,4 @@ const ProductCard = ({ id, image, name, description, price }) => {
   );
 };
 
-export default ProductCard;
+export default memo(ProductCard);

@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
+import Logo from "../Logo/Logo";
 
 const Footer = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const inputRef = useRef();
   const footerLinks = [
     {
       title: "Company",
@@ -47,6 +50,15 @@ const Footer = () => {
     { icon: FaYoutube, href: "#", label: "YouTube" },
   ];
 
+  const handleSubmit = (e) => {
+    setIsSubmitting(true);
+    e.preventDefault();
+
+    console.log(inputRef.current.value);
+    setTimeout(() => setIsSubmitting(false), 200);
+    inputRef.current.value = "";
+  };
+
   return (
     <footer id="contact" className="bg-gray-900 text-white pt-16 pb-8">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -54,34 +66,39 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="lg:col-span-2">
             <h3 className="text-2xl font-bold text-primary-400 mb-4">
-              FreshJuice
+              <Logo />
             </h3>
             <p className="text-gray-400 mb-6">
               Bringing fresh, organic juices and smoothies to your doorstep
               since 2020.
             </p>
-
-            <div className="space-y-2 text-gray-400">
-              <p className="flex items-center space-x-2">
-                <span>📞</span>
-                <span>(555) 123-4567</span>
-              </p>
-              <p className="flex items-center space-x-2">
-                <span>✉️</span>
-                <span>hello@freshjuice.com</span>
-              </p>
-              <p className="flex items-center space-x-2">
-                <span>📍</span>
-                <span>123 Wellness St, Health City, HC 12345</span>
-              </p>
-            </div>
+            <form
+              onSubmit={handleSubmit}
+              className="bg-white h-10 text-black flex items-center justify-between rounded-full"
+            >
+              <input
+                className="w-full h-full outline-none px-5"
+                type="email"
+                name="email"
+                ref={inputRef}
+                required
+                placeholder="Enter your email"
+              />
+              <button
+                disabled={isSubmitting}
+                type="submit"
+                className="text-lg disabled:bg-gray-500 h-full cursor-pointer px-3 bg-primary-500 rounded-r-full"
+              >
+                {isSubmitting ? "subscribing" : "subscribe"}
+              </button>
+            </form>
           </div>
 
           {/* Links Sections */}
           {footerLinks.map((section, index) => (
             <div key={index}>
               <h4 className="font-bold text-lg mb-4">{section.title}</h4>
-              <ul className="space-y-2">
+              <ul className="-space-y-2">
                 {section.links.map((link, linkIndex) => (
                   <li key={linkIndex}>
                     <a

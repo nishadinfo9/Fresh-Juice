@@ -1,8 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Button from "../UI/Button";
+import { useNavigate } from "react-router-dom";
 
 const HealthBenefits = () => {
+  const navigate = useNavigate();
   const benefits = [
     {
       icon: "💪",
@@ -90,11 +92,7 @@ const HealthBenefits = () => {
               variant="secondary"
               size="large"
               className=""
-              onClick={() =>
-                document
-                  .querySelector("#shop")
-                  ?.scrollIntoView({ behavior: "smooth" })
-              }
+              onClick={() => navigate("/menu")}
             />
           </div>
         </motion.div>

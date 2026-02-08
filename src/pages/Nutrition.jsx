@@ -74,7 +74,7 @@ const Nutrition = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white pt-32 pb-20">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white ">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -109,6 +109,7 @@ const Nutrition = () => {
                 <img
                   src={product.image}
                   alt={product.name}
+                  loading="lazy"
                   className="w-full h-full object-cover"
                 />
               </div>

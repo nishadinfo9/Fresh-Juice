@@ -8,7 +8,7 @@ const ProductShowcase = () => {
       id: 1,
       name: "Orange Sunrise",
       description: "Fresh-squeezed oranges with a hint of ginger",
-      price: "$6.99",
+      price: 6.99,
       image:
         "https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=400&h=400&fit=crop",
     },
@@ -16,7 +16,7 @@ const ProductShowcase = () => {
       id: 2,
       name: "Green Detox",
       description: "Kale, spinach, apple, and lemon blend",
-      price: "$7.99",
+      price: 7.99,
       image:
         "https://images.unsplash.com/photo-1610970881699-44a5587cabec?w=400&h=400&fit=crop",
     },
@@ -24,7 +24,7 @@ const ProductShowcase = () => {
       id: 3,
       name: "Berry Blast",
       description: "Mixed berries with coconut water",
-      price: "$7.49",
+      price: 7.49,
       image:
         "https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=400&h=400&fit=crop",
     },
@@ -35,7 +35,7 @@ const ProductShowcase = () => {
       id: 4,
       name: "Tropical Paradise",
       description: "Mango, pineapple, and passion fruit",
-      price: "$8.99",
+      price: 8.99,
       image:
         "https://images.unsplash.com/photo-1505252585461-04db1eb84625?w=400&h=400&fit=crop",
     },
@@ -43,7 +43,7 @@ const ProductShowcase = () => {
       id: 5,
       name: "Protein Power",
       description: "Banana, peanut butter, and plant protein",
-      price: "$9.49",
+      price: 9.49,
       image:
         "https://images.unsplash.com/photo-1638176066666-ffb2f013c7dd?w=400&h=400&fit=crop",
     },
@@ -51,7 +51,7 @@ const ProductShowcase = () => {
       id: 6,
       name: "Acai Energy",
       description: "Acai berries, banana, and granola",
-      price: "$9.99",
+      price: 9.99,
       image:
         "https://images.unsplash.com/photo-1590301157890-4810ed352733?w=400&h=400&fit=crop",
     },
